@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+<h1 style="width: 100%">{% block title %} Add a New Item {% endblock %}</h1>
+<form method="post">
+  <p>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="name" />
+  </p>
+  <p>
+    <label for="description">Description:</label>
+    <input
+      type="text"
+      name="description"
+      id="description"
+      value="description"
+    />
+  </p>
+  <p>
+    <label for="price">Price:</label>
+    <input type="text" name="price" id="price" value="price" />
+  </p>
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+</form>
+{% endblock %}

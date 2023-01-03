@@ -27,18 +27,17 @@ def index():
     items = Item.query.all()
     return render_template('home.html', items=items)
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add/', methods=['GET', 'POST'])
 def add_item():
     if request.method == 'POST':
-        title = request.form['title']
+        name = request.form['name']
         description = request.form['description']
         price = request.form['price']
-        new_item = Item(title, description, price)
+        new_item = Item(name, description, price)
         db.session.add(new_item)
         db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        return render_template('add_item.html')
+        return redirect(url_for('index'))
+    return render_template('add_item.html')
 
 @app.route('/delete/<int:id>')
 def delete_item(id):
