@@ -39,12 +39,14 @@ def add_item():
         return redirect(url_for('index'))
     return render_template('add_item.html')
 
-@app.route('/delete/<int:id>')
-def delete_item(id):
-    item = Item.query.get(id)
-    db.session.delete(item)
-    db.session.commit()
-    return redirect(url_for('home'))
+@app.route('/delete', methods=['GET','POST'])
+def delete_item():
+    if request.method == 'POST':
+        item = Item.query.filter_by(id=request.form['id']).first()
+        db.session.delete(item)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('delete.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
